@@ -28,19 +28,16 @@
 			}
 		};
 
-		function generateRandomString($length = 100) {
+		function better_crypt($input) {
 			$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ./';
 			$charactersLength = strlen($characters);
-			$randomString = '';
+			$saltString = '';
 			for ($i = 0; $i < $length; $i++) {
-					$randomString .= $characters[rand(0, $charactersLength - 1)];
-			}
-			return $randomString;
-		};
+					$saltString .= $characters[rand(0, $charactersLength - 1)];
+			};
 
-		function better_crypt($input) {
 			$salt = '$6$rounds=5000$';
-			$salt .= generateRandomString();
+			$salt .= $saltString;
 			return crypt($input, $salt);
 		};
 
